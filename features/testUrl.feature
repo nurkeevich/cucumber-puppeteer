@@ -1,7 +1,12 @@
 Feature: Test URL
-    As a developer I want to test URL to make sure its correct
+    As a Tester I want to test URL to make sure its correct
 
-    Scenario: Testing Google URL
-        When  I open the url "https://www.google.com/"
-        Then  I expect the page url is "https://www.google.com/"
-        And   I expect the page url is not "https://www.googler.com/"
+    Scenario Outline: Verifing URLs
+        When I open the url <openURL>
+        Then I expect the page url is <expectURL>
+
+        Examples:
+            | openURL                     | expectURL                   |
+            | "https://www.google.com/"   | "https://www.google.com/"   |
+            | "https://www.facebook.com/" | "https://www.facebook.com/" |
+

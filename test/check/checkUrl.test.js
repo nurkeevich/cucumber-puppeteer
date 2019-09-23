@@ -16,14 +16,14 @@ afterAll(async () => {
 
 describe('checkUrl', () => {
 
-  it('identifies a matching URL', async () => {    
+  it('identifies a matching URL', async () => {
     await checkUrl.call(browserScope, null, testUrl);
   });
 
   it('fails when the URLs do not match and they should', async () => {
     const nonMatchingUrl = "http://fullahead.org";
     await expect(checkUrl.call(browserScope, null, nonMatchingUrl)).rejects.toThrow(`Expected "${nonMatchingUrl}" to equal "${testUrl}"`);
-  });  
+  });
 
   it('identifies a non-matching URL', async () => {
     const nonMatchingUrl = "http://fullahead.org";
@@ -32,6 +32,6 @@ describe('checkUrl', () => {
 
   it('fails when the URLs match and they should not', async () => {
     await expect(checkUrl.call(browserScope, "not", testUrl)).rejects.toThrow(`Expected "${testUrl}" to not equal "${testUrl}"`);
-  });    
+  });
 
 }); 
