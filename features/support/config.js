@@ -45,7 +45,7 @@ const config = {
 }
 
 // Create required folders
-BeforeAll(async function(){
+BeforeAll(async function () {
   await createFolder(`${config.reportPath}`);
   await createFolder(`${config.screenshotPath}/compare`);
   await createFolder(`${config.screenshotPath}/diff`);
@@ -55,24 +55,24 @@ BeforeAll(async function(){
 
 
 // Use the same BrowserScope object for each scenario in a feature
-Before(async function(scenario) {
+Before(async function (scenario) {
 
   // Check if the current scenario is in the same feature test
   const currentFeature = scenario.sourceLocation.uri;
-  if(featureScope.isNewFeature(currentFeature))
+  if (featureScope.isNewFeature(currentFeature))
     await featureScope.init(currentFeature, this.worldParameters);
-  
+
   this.page = featureScope.browserScope.page;
   this.browser = featureScope.browserScope.browser;
   this.config = config;
 });
 
 // After hook for each scenario
-After(async function(scenario){
+After(async function (scenario) {
   featureScope.browserScope = this;
 
   // Take a screenshot if a scenario fails
-  if(scenario.result.status === Status.FAILED) {
+  if (scenario.result.status === Status.FAILED) {
     const screenShotName = scenario.pickle.name.replace(/[\W_]+/g, '-');
     await this.page.screenshot({
       path: `${config.screenshotPath}/error/${screenShotName}.png`
@@ -81,6 +81,6 @@ After(async function(scenario){
 });
 
 // After all feature tests are complete
-AfterAll(async function() {
+AfterAll(async function () {
   await featureScope.browserScope.close();
 });
