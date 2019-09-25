@@ -1,11 +1,7 @@
 const { Given } = require('cucumber');
-const puppeteer = require('puppeteer');
 const openUrl = require('../support/action/openUrl');
+const waitFor = require('../support/action/waitFor');
 
-const url = 'http://localhost:4208/energy/loggedout';
-
-Given('user at login page', async function () {
+Given('I should be at {string-env} page', async function (url) {
     await openUrl.call(this, url);
-    const browser = puppeteer.launch();
-
 });
