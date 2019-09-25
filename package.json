@@ -50,5 +50,8 @@
       "./test/jest.setup.js"
     ]
   },
-  "snyk": true
+  "snyk": true,
+  "puppeteerOptions": {
+    "headless": false
+  }
 }
