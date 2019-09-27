@@ -7,11 +7,11 @@ const assert = require('assert').strict;
  * @param {String} not The string "not" to negate the check (should not match the property value).
  * @param {String} expectedValue Expected value to check the property for.
  */
-module.exports = async function(attribute, selector, not, expectedValue) {
+module.exports = async function (attribute, selector, not, expectedValue) {
   /* istanbul ignore next */  // Required otherwise code coverage evaluation fails within $eval calls
   const attributeValue = await this.page.$eval(selector, (el, attribute) => { return el.getAttribute(attribute) }, attribute);
   const shouldValuesBeEqual = not ? false : true;
-  const shouldEqual = shouldValuesBeEqual ? 'equal' : 'not equal'
+  // const shouldEqual = shouldValuesBeEqual ? 'equal' : 'not equal'
 
   assert(attributeValue !== null, `Expected "${attribute}" to exist`);
   assert.strictEqual(attributeValue === expectedValue, shouldValuesBeEqual, `Expected "${attributeValue}" to ${shouldValuesBeEqual ? 'equal' : 'not equal'} "${expectedValue}" of element "${selector}" attribute "${attribute}"`);
